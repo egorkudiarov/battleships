@@ -7,10 +7,12 @@ int check_destroyed(int coordx, int coordy, Ship *ships, int field[8][8]);
 int check_attack(int x, int y, Ship *ships, int field[8][8]);
 int check_overlaps(Ship *ship, Ship *ships, int num);
 
-#include "test_funcs.h"
+#include "testfuncs.h"
 void nullmat(int field[8][8]);
 void printm(int field[8][8], int mode);
+void printships(Ship *ships);
 
+#include "structs.h"
 
 #define DIMX 8
 #define DIMY 8
@@ -36,11 +38,6 @@ int test_vectors[8][5] = {
 	{5,1,2,0,0},
 	{7,3,5,1,0}
 };
-/* 
-typedef struct {
-	short x, y, lenght, derection, is_destroed;
-}Ship;
-*/
 
 void generate_ships(int field[8][8], Ship *ships, int num){
     srand(time(NULL));
@@ -78,12 +75,7 @@ void draw_ships(int field[8][8], Ship *ships){
     }
 }
  
-void printships(Ship *ships){
-    for(int i = 0; i < SHIPCOUNT; i++){
-        printf("%d %d %d %d\n", ships[i].x, ships[i].y, ships[i].lenght, ships[i].derection);
-    }
-}
- 
+
 int main() {
 	Ship test_ships[5];
 	for(int i=0; i < 5; i++) {

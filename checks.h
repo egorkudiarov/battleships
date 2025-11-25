@@ -1,9 +1,8 @@
+#include "structs.h"
+
 #ifndef CHECKS_H_INCLUDED
 #define CHECKS_H_INCLUDED
 
-typedef struct {
-	short x, y, lenght, derection, is_destroed;
-}Ship;
 
 int check_destroyed(int coordx, int coordy, Ship *ships, int field[8][8]) {
 	int is_point_on = 0;
