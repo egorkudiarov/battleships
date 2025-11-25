@@ -3,6 +3,14 @@
 #include <time.h>
 
 #include "checks.h" 
+int check_destroyed(int coordx, int coordy, Ship *ships, int field[8][8]);
+int check_attack(int x, int y, Ship *ships, int field[8][8]);
+int check_overlaps(Ship *ship, Ship *ships, int num);
+
+#include "test_funcs.h"
+void nullmat(int field[8][8]);
+void printm(int field[8][8], int mode);
+
 
 #define DIMX 8
 #define DIMY 8
@@ -28,11 +36,12 @@ int test_vectors[8][5] = {
 	{5,1,2,0,0},
 	{7,3,5,1,0}
 };
- 
+/* 
 typedef struct {
 	short x, y, lenght, derection, is_destroed;
 }Ship;
- 
+*/
+
 void generate_ships(int field[8][8], Ship *ships, int num){
     srand(time(NULL));
     int i = 0;
@@ -40,7 +49,7 @@ void generate_ships(int field[8][8], Ship *ships, int num){
         Ship temp;
         temp.is_destroed = 0;
         temp.derection = rand()%2;
-        temp.lenght = (rand()%MAXLEN-MINLEN) + MINLEN;
+        temp.lenght = (rand()%(MAXLEN-MINLEN)) + MINLEN;
         switch(temp.derection) {
             case 0:{
                 temp.x = rand()%(DIMX-temp.lenght);
@@ -53,7 +62,6 @@ void generate_ships(int field[8][8], Ship *ships, int num){
             }
         } ;
         if(check_overlaps(&temp, ships, i) == 0){
-            printf("%d\n", i);
             ships[i] = temp;
             i++;
         }
@@ -70,14 +78,9 @@ void draw_ships(int field[8][8], Ship *ships){
     }
 }
  
-void nullmat(int field[8][8]){
-    for(int i=0; i<8; i++) {for(int j=0; j<8; j++) {field[i][j] = 0;}}
-}
-
-void printm(int field[8][8], int mode) {
-    switch(mode){
-	case 1: for(int i=0; i<8; i++) {for(int j=0; j<8; j++) {printf("%d ",field[i][j]);}printf("\n");}	
-    default: for(int i=0; i<8; i++) {for(int j=0; j<8; j++) {printf("%d",field[i][j]);}printf("\n");}	
+void printships(Ship *ships){
+    for(int i = 0; i < SHIPCOUNT; i++){
+        printf("%d %d %d %d\n", ships[i].x, ships[i].y, ships[i].lenght, ships[i].derection);
     }
 }
  
@@ -97,7 +100,8 @@ int main() {
 	    generate_ships(field, ships, SHIPCOUNT);
 	    nullmat(field);
 	    draw_ships(field, ships);
-	    printm(field, 1);
+	    printm(field, 2);
+        printships(ships);
 	return 0;
 }
 

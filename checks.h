@@ -73,12 +73,12 @@ int check_overlaps(Ship *ship, Ship *ships, int num){
             case 1: {
                 int xdelta, ydelta = 0; 
                 if(ship->derection == 0){
-                    xdelta = (x2 > x1)?(x2 - x1 - ship->lenght):(x1 - x2);    
-                    ydelta = (y1 > y2)?(y1 - y2 - ships[i].lenght):(y2 - y1);
+                    xdelta = (x2 > x1)?(x2 - x1 - ship->lenght):(x1 - x2 - 1);    
+                    ydelta = (y1 > y2)?(y1 - y2 - ships[i].lenght):(y2 - y1 - 1);
                 }
                 if(ships[i].derection == 0){
-                    xdelta = (x1 > x2)?(x1 - x2 - ships[i].lenght):(x2 - x1);
-                    ydelta = (y2 > y1)?(y2 - y1 - ship->lenght):(y1 - y2);    
+                    xdelta = (x1 > x2)?(x1 - x2 - ships[i].lenght):(x2 - x1 - 1);
+                    ydelta = (y2 > y1)?(y2 - y1 - ship->lenght):(y1 - y2 - 1);    
                 }
                 if((xdelta >= 1)||(ydelta >= 1)){
                     sum++;
@@ -96,8 +96,5 @@ int check_overlaps(Ship *ship, Ship *ships, int num){
     }
     return (sum == num)?(0):(1);    
 }
- 
-
-
 
 #endif
