@@ -23,10 +23,7 @@ void generate_ships(int field[8][8], Ship *ships, int num);
 #define MAXLEN 5
 #define MINLEN 2
 #define SHIPCOUNT 5
- 
 
-
- 
 
 int main() {
     int field[8][8];

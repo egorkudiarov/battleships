@@ -7,6 +7,9 @@
 #include "checks.h"
 int check_attack(int x, int y, Ship *ships, int field[8][8]);
 
+#include "testfuncs.h"
+void nullmat(int field[8][8]);
+
 #ifndef GENERATORS_H_INCLUDED
 #define GENERATORS_H_INCLUDED
 
@@ -16,7 +19,7 @@ int check_attack(int x, int y, Ship *ships, int field[8][8]);
 #define MINLEN 2
 #define SHIPCOUNT 5
 
-void generate_ships(int field[8][8], Ship *ships, int num){
+void generate_ships(Ship *ships, int num){
     srand(time(NULL));
     int i = 0;
     do{
@@ -43,7 +46,26 @@ void generate_ships(int field[8][8], Ship *ships, int num){
     }while(i < num); 
 }
 
-void generate_board(int field[8][8], Ship ships){
+void generate_board(int field[DIMX][DIMY], Ship *ships){
+    for(int i=0; i<SHIPCOUNT; i++){
+        switch(ships[i].derection){
+            case 0: {for(int j=0; j < ships[i].lenght; j++){field[ships[i].x+j][ships[i].y] = 1;}break;}
+            case 1: {for(int j=0; j < ships[i].lenght; j++){field[ships[i].x][ships[i].y+j] = 1;}break;}
+        }
+    }
+}
+
+void generate_start_game(int player_field[DIMX][DIMY], int player_attack_field[DIMX][DIMY], int computer_field[DIMX][DIMY], int computer_attack_field[DIMX][DIMY],Ship *player_ships, Ship *computer_ships){
+    nullmat(player_field);  
+    nullmat(player_attack_field);
+    nullmat(computer_field); 
+    nullmat(computer_attack_field);
+    generate_ships(player_ships, SHIPCOUNT);
+    generate_ships(computer_ships, SHIPCOUNT);
+    generate_board(player_field, player_ships);  
+    generate_board(player_attack_field, computer_ships);
+    generate_board(computer_field, player_ships); 
+    generate_board(computer_attack_field, computer_ships);
     
 }
 #endif
