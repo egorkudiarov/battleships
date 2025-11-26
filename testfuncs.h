@@ -26,4 +26,13 @@ void printships(Ship *ships){
     }
 }
 
+void draw_ships(int field[8][8], Ship *ships){
+    for(int i=0; i<SHIPCOUNT; i++){
+        switch(ships[i].derection){
+            case 0: {for(int j=0; j < ships[i].lenght; j++){field[ships[i].x+j][ships[i].y] = 1;}break;}
+            case 1: {for(int j=0; j < ships[i].lenght; j++){field[ships[i].x][ships[i].y+j] = 1;}break;}
+        }
+    }
+}
+
 #endif

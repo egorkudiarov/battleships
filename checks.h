@@ -3,7 +3,6 @@
 #ifndef CHECKS_H_INCLUDED
 #define CHECKS_H_INCLUDED
 
-
 int check_destroyed(int coordx, int coordy, Ship *ships, int field[8][8]) {
 	int is_point_on = 0;
 	for(int i=0; i < 5; i++) {
@@ -28,6 +27,7 @@ int check_destroyed(int coordx, int coordy, Ship *ships, int field[8][8]) {
 					is_point_on = 1;
 				}
 				sum += field[y][x];}
+            break;
 		}
 		if((sum == (ships[i].lenght * 2))&&(is_point_on)) {
 			return 1;
