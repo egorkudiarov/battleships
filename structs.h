@@ -2,7 +2,7 @@
 #define STRUCTS_H_INCLUDED
 
 typedef struct {
-	short x, y, lenght, derection, is_destroed;
+	short x, y, lenght, derection, is_destroyed;
 }Ship;
 
 #endif

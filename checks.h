@@ -3,6 +3,12 @@
 #ifndef CHECKS_H_INCLUDED
 #define CHECKS_H_INCLUDED
 
+#define DIMX 8
+#define DIMY 8
+#define MAXLEN 5
+#define MINLEN 2
+#define SHIPCOUNT 5
+
 int check_destroyed(int coordx, int coordy, Ship *ships, int field[8][8]) {
 	int is_point_on = 0;
 	for(int i=0; i < 5; i++) {
@@ -30,7 +36,8 @@ int check_destroyed(int coordx, int coordy, Ship *ships, int field[8][8]) {
             break;
 		}
 		if((sum == (ships[i].lenght * 2))&&(is_point_on)) {
-			return 1;
+			ships[i].is_destroyed = 1;
+            return 1;
 		}
 		if(is_point_on) {
 			return 0;
@@ -96,4 +103,11 @@ int check_overlaps(Ship *ship, Ship *ships, int num){
     return (sum == num)?(0):(1);    
 }
 
+int check_win(Ship *ships){
+    int sum = 0;
+    for(int i = 0; i < SHIPCOUNT; i++){
+        sum += (ships[i].is_destroyed != 0)?(1):(0);
+    }
+    return (sum == SHIPCOUNT)?(1):(0);
+}
 #endif

@@ -24,7 +24,7 @@ void generate_ships(Ship *ships, int num){
     int i = 0;
     do{
         Ship temp;
-        temp.is_destroed = 0;
+        temp.is_destroyed = 0;
         temp.derection = rand()%2;
         temp.lenght = (rand()%(MAXLEN-MINLEN)) + MINLEN;
         switch(temp.derection) {
@@ -43,7 +43,7 @@ void generate_ships(Ship *ships, int num){
             ships[i] = temp;
             i++;
         }
-    }while(i < num); 
+    }while(i < num+1); 
 }
 
 void generate_board(int field[DIMX][DIMY], Ship *ships){

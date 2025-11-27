@@ -41,7 +41,7 @@ void board_write(FILE *main, FILE *temp, int player_field[DIMX][DIMY], int sub_p
 
 void ships_write(FILE *file, Ship *ships){
     for(int i = 0; i < SHIPCOUNT; i++){
-        printf("%d %d %d %d %d\n", ships[i].x, ships[i].y, ships[i].lenght, ships[i].derection, ships[i].is_destroed);
+        printf("%d %d %d %d %d\n", ships[i].x, ships[i].y, ships[i].lenght, ships[i].derection, ships[i].is_destroyed);
     }
 }
 
