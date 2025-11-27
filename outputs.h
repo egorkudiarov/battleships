@@ -29,8 +29,41 @@ char *char_select(int ch){
     }
 }
 
+void draw_around_ship(int field[DIMX][DIMY], Ship *ships){
+    for(int i = 0; i < SHIPCOUNT; i++){
+        if((ships[i].is_destroyed == 1)&&(ships[i].is_drawn == 0)){
+            ships[i].is_drawn = 1;
+            switch(ships[i].derection){
+                case 0: {
+                    int j = 0;
+                    field[ships[i].x-1][ships[i].y-1] = 2;
+                    field[ships[i].x-1][ships[i].y+1] = 2;
+                    for(j; j < ships[i].lenght; j++){
+                        field[ships[i].x+j][ships[i].y-1] = 2;
+                        field[ships[i].x+j][ships[i].y+1] = 2;
+                    }
+                    field[ships[i].x+1][ships[i].y-1] = 2;
+                    field[ships[i].x+1][ships[i].y+1] = 2;
+                    break;
+                }
+                case 1: { 
+                    int j = 0;
+                    field[ships[i].x-1][ships[i].y-1] = 2;
+                    field[ships[i].x+1][ships[i].y-1] = 2;
+                    for(j; j < ships[i].lenght; j++){
+                        field[ships[i].x-1][ships[i].y+j] = 2;
+                        field[ships[i].x+1][ships[i].y+j] = 2;
+                    }
+                    field[ships[i].x-1][ships[i].y+1] = 2;
+                    field[ships[i].x+1][ships[i].y+1] = 2;
+                    break;
+                }
+            }   
+        }
+    }
+}
 
-void print_boards(int player_field[DIMX][DIMY], int attack_field[DIMX][DIMY]){
+void print_boards(int player_field[DIMX][DIMY], int player_display_field[DIMX][DIMY]){
     printf("  ");
     for(int j=0; j<DIMX; j++){printf("%d ", j);}
     printf("\t");
@@ -46,7 +79,7 @@ void print_boards(int player_field[DIMX][DIMY], int attack_field[DIMX][DIMY]){
         printf("\t");
         printf("%d ",i);
         for(int j=0; j<DIMX; j++){
-            printf("%s ",char_select(attack_field[j][i]));
+            printf("%s ",char_select(player_display_field[j][i]));
         }
         printf("\n");
     }

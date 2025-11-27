@@ -6,6 +6,7 @@
 
 #include "checks.h"
 int check_attack(int x, int y, Ship *ships, int field[8][8]);
+int check_overlaps(Ship *ship, Ship *ships, int num);
 
 #include "testfuncs.h"
 void nullmat(int field[DIMX][DIMY]);
@@ -25,6 +26,7 @@ void generate_ships(Ship *ships, int num){
     do{
         Ship temp;
         temp.is_destroyed = 0;
+        temp.is_drawn = 0;
         temp.derection = rand()%2;
         temp.lenght = (rand()%(MAXLEN-MINLEN)) + MINLEN;
         switch(temp.derection) {
@@ -55,17 +57,35 @@ void generate_board(int field[DIMX][DIMY], Ship *ships){
     }
 }
 
-void generate_start_game(int player_field[DIMX][DIMY], int player_attack_field[DIMX][DIMY], int computer_field[DIMX][DIMY], int computer_attack_field[DIMX][DIMY],Ship *player_ships, Ship *computer_ships){
-    nullmat(player_field);  
-    nullmat(player_attack_field);
-    nullmat(computer_field); 
-    nullmat(computer_attack_field);
-    generate_ships(player_ships, SHIPCOUNT);
-    generate_ships(computer_ships, SHIPCOUNT);
-    generate_board(player_field, player_ships);  
-    //generate_board(player_attack_field, computer_ships);
-    generate_board(computer_field, player_ships); 
-    //generate_board(computer_attack_field, computer_ships);
-    
+void generate_attack(int *x, int *y, int field[DIMX][DIMY]){
+    srand(time(NULL));
+    int flag = 0;
+    do{
+        int i = rand()%DIMX;
+        int j = rand()%DIMY;
+        if(field[i][j] == 0){
+            *x = j;
+            *y = i;
+            flag = 1;
+        };
+    }while(flag == 0);
+}
+
+void generate_start_game(int player_field[DIMX][DIMY], int player_attack_field[DIMX][DIMY], int player_display_field[DIMX][DIMY], 
+                         int computer_field[DIMX][DIMY], int computer_attack_field[DIMX][DIMY], int computer_display_field[DIMX][DIMY],
+                         Ship *player_ships, Ship *computer_ships){
+        nullmat(player_field);  
+        nullmat(player_attack_field);
+        nullmat(player_display_field);
+        nullmat(computer_field); 
+        nullmat(computer_attack_field);
+        nullmat(computer_display_field);
+        generate_ships(player_ships, SHIPCOUNT);
+        generate_ships(computer_ships, SHIPCOUNT);
+        generate_board(player_field, player_ships);  
+        generate_board(player_attack_field, computer_ships);
+        generate_board(computer_field, player_ships); 
+        generate_board(computer_attack_field, computer_ships);
+        
 }
 #endif

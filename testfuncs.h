@@ -14,7 +14,7 @@
 void nullmat(int field[DIMX][DIMY]){
     for(int i=0; i<DIMX; i++) {for(int j=0; j<DIMY; j++) {field[i][j] = 0;}}
 }
-
+/*
 void printm(int field[8][8], int mode) {
     switch(mode){
 	case 1: {for(int i=0; i<8; i++) {for(int j=0; j<8; j++) {printf("%d ",field[i][j]);}printf("\n");}break;}
@@ -37,5 +37,5 @@ void draw_ships(int field[8][8], Ship *ships){
         }
     }
 }
-
+*/
 #endif

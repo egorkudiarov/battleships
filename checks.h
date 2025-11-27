@@ -46,13 +46,24 @@ int check_destroyed(int coordx, int coordy, Ship *ships, int field[8][8]) {
 	}
 }
 
+int check_win(Ship *ships){
+    int sum = 0;
+    for(int i = 0; i < SHIPCOUNT; i++){
+        sum += (ships[i].is_destroyed != 0)?(1):(0);
+    }
+    return (sum == SHIPCOUNT)?(1):(0);
+}
+    
 int check_attack(int x, int y, Ship *ships, int field[8][8]) {
 	if(field[y][x] == 2) {
 		return 2; //Already Hit
 	}
 	if(field[y][x] == 1) {
-		field[y][x] = 2;
 		if(check_destroyed(x, y, ships, field) == 1) {
+            if (check_win(ships) == 1)
+            {
+                return 4; //Win
+            }
             return 3; //Destroyed
         }   
 		return 1; //Hit
@@ -103,11 +114,4 @@ int check_overlaps(Ship *ship, Ship *ships, int num){
     return (sum == num)?(0):(1);    
 }
 
-int check_win(Ship *ships){
-    int sum = 0;
-    for(int i = 0; i < SHIPCOUNT; i++){
-        sum += (ships[i].is_destroyed != 0)?(1):(0);
-    }
-    return (sum == SHIPCOUNT)?(1):(0);
-}
 #endif
