@@ -8,7 +8,7 @@
 int check_attack(int x, int y, Ship *ships, int field[8][8]);
 
 #include "testfuncs.h"
-void nullmat(int field[8][8]);
+void nullmat(int field[DIMX][DIMY]);
 
 #ifndef GENERATORS_H_INCLUDED
 #define GENERATORS_H_INCLUDED
@@ -63,9 +63,9 @@ void generate_start_game(int player_field[DIMX][DIMY], int player_attack_field[D
     generate_ships(player_ships, SHIPCOUNT);
     generate_ships(computer_ships, SHIPCOUNT);
     generate_board(player_field, player_ships);  
-    generate_board(player_attack_field, computer_ships);
+    //generate_board(player_attack_field, computer_ships);
     generate_board(computer_field, player_ships); 
-    generate_board(computer_attack_field, computer_ships);
+    //generate_board(computer_attack_field, computer_ships);
     
 }
 #endif

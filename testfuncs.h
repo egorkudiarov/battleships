@@ -7,9 +7,12 @@
 
 #define SHIPCOUNT 5
 
+#define DIMX 8
+#define DIMY 8
 
-void nullmat(int field[8][8]){
-    for(int i=0; i<8; i++) {for(int j=0; j<8; j++) {field[i][j] = 0;}}
+
+void nullmat(int field[DIMX][DIMY]){
+    for(int i=0; i<DIMX; i++) {for(int j=0; j<DIMY; j++) {field[i][j] = 0;}}
 }
 
 void printm(int field[8][8], int mode) {
